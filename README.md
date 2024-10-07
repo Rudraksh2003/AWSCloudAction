@@ -1,5 +1,7 @@
 # AWSCloudAction - Terraform Module: GitHub Actions Runner on AWS
+---
 
+![Deploy GitHub Actions Runners on AWS with Terraform](https://github.com/Rudraksh2003/AWSCloudAction/blob/main/Blue%20Pink%20Gradient%20Fashion%20Banner.png)
 This Terraform module automates the deployment of a self-hosted GitHub Actions runner on Amazon Web Services (AWS). It provisions an EC2 instance, installs the GitHub Actions runner, and configures logging and monitoring using Amazon CloudWatch.
 Creating a comprehensive project architecture for deploying GitHub Actions runners on AWS using Terraform involves detailing the components and their relationships. Here’s an overview of the architecture:
 
