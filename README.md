@@ -1,6 +1,102 @@
 # AWSCloudAction - Terraform Module: GitHub Actions Runner on AWS
 
 This Terraform module automates the deployment of a self-hosted GitHub Actions runner on Amazon Web Services (AWS). It provisions an EC2 instance, installs the GitHub Actions runner, and configures logging and monitoring using Amazon CloudWatch.
+Creating a comprehensive project architecture for deploying GitHub Actions runners on AWS using Terraform involves detailing the components and their relationships. Here’s an overview of the architecture:
+
+### Project Architecture Overview
+
+1. **AWS Infrastructure**:
+   - **VPC**: A Virtual Private Cloud to host the resources securely.
+   - **Subnets**: Public and private subnets for organizing resources and enhancing security.
+   - **EC2 Instance**: The main resource, an Amazon EC2 instance running the GitHub Actions runner.
+   - **Security Group**: A security group that controls inbound and outbound traffic to the EC2 instance.
+   - **IAM Role**: An IAM role associated with the EC2 instance that grants permissions for logging and monitoring.
+
+2. **Monitoring & Logging**:
+   - **CloudWatch Logs**: For capturing logs from the GitHub Actions runner.
+   - **CloudWatch Metrics**: For monitoring performance metrics such as CPU and memory usage.
+   - **CloudWatch Alarms**: For setting thresholds and notifications based on resource usage.
+
+3. **GitHub Integration**:
+   - **GitHub Actions**: The CI/CD tool that will use the self-hosted runner for executing workflows.
+
+### Detailed Architecture Diagram
+
+Here’s a textual representation of the architecture, which you can use to create a visual diagram with a tool like Lucidchart, Draw.io, or any diagramming tool of your choice.
+
+```
+[GitHub Repository]
+        |
+        |  (Triggers Workflows)
+        v
+[GitHub Actions]
+        |
+        |  (Uses Self-hosted Runner)
+        v
+[Amazon Cloud]
+   +-----------------------------------------+
+   |               VPC                       |
+   |  +------------------------------+       |
+   |  |         Subnet              |       |
+   |  |      (Public/Private)       |       |
+   |  |    +-------------------+     |       |
+   |  |    |   EC2 Instance    |     |       |
+   |  |    | (GitHub Runner)   |     |       |
+   |  |    +-------------------+     |       |
+   |  +------------------------------+       |
+   |                                         |
+   |  +------------------------------+       |
+   |  |       Security Group         |       |
+   |  +------------------------------+       |
+   |                                         |
+   |  +------------------------------+       |
+   |  |        IAM Role             |       |
+   |  +------------------------------+       |
+   |                                         |
+   |  +------------------------------+       |
+   |  |      CloudWatch Logs         |       |
+   |  +------------------------------+       |
+   |                                         |
+   |  +------------------------------+       |
+   |  |      CloudWatch Metrics      |       |
+   |  +------------------------------+       |
+   |                                         |
+   |  +------------------------------+       |
+   |  |      CloudWatch Alarms       |       |
+   |  +------------------------------+       |
+   +-----------------------------------------+
+```
+
+### Components Description
+
+1. **GitHub Repository**: This is where your code resides, and GitHub Actions workflows are defined. It triggers jobs that run on the self-hosted runner.
+
+2. **GitHub Actions**: Utilizes the self-hosted runner for executing CI/CD workflows, providing flexibility and control over the execution environment.
+
+3. **VPC**: A secure network environment where all resources are deployed.
+
+4. **Subnet**: Organizes resources within the VPC. Use public subnets for instances that need direct access to the internet and private subnets for backend services.
+
+5. **EC2 Instance**: Hosts the self-hosted GitHub Actions runner. It runs jobs defined in your GitHub workflows.
+
+6. **Security Group**: Defines the inbound and outbound traffic rules for the EC2 instance, ensuring only authorized access.
+
+7. **IAM Role**: Grants necessary permissions for the EC2 instance to interact with AWS services, such as CloudWatch for logging and monitoring.
+
+8. **CloudWatch Logs**: Captures logs from the GitHub Actions runner for troubleshooting and auditing.
+
+9. **CloudWatch Metrics**: Monitors resource usage metrics (e.g., CPU, memory) to keep track of performance.
+
+10. **CloudWatch Alarms**: Sends notifications when thresholds are exceeded, allowing proactive management of resources.
+
+### Deployment Process
+
+1. **Initialization**: Terraform initializes the project and creates the necessary state files.
+2. **Configuration**: The user modifies Terraform configurations as needed, specifying the GitHub repository details and runner configurations.
+3. **Resource Creation**: Terraform provisions the specified AWS resources, including the VPC, EC2 instance, IAM role, and CloudWatch configuration.
+4. **Runner Configuration**: The EC2 instance is configured to run the GitHub Actions runner and send logs to CloudWatch.
+5. **Monitoring Setup**: CloudWatch is set up to monitor logs, metrics, and alarms based on the EC2 instance's performance.
+
 
 ## Features
 
